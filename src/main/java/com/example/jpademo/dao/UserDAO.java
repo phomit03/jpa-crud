@@ -20,13 +20,14 @@ public class UserDAO {
     }
 
     public UserEntity getUserById(Integer id) {
-        UserEntity userEntity = null;
         try {
-            userEntity = entityManager.find(UserEntity.class, id);
-        } finally {
-            entityManager.close();
+            Query query = entityManager.createQuery("SELECT a FROM UserEntity a WHERE a.id = :id");
+            query.setParameter("id", id);
+            return (UserEntity) query.getSingleResult();
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+            return null;
         }
-        return userEntity;
     }
 
     public List<UserEntity> getAllUser(){
@@ -56,14 +57,26 @@ public class UserDAO {
             entityManager.merge(userEntity);
             transaction.commit();
         } catch (Exception e) {
+            entityManager.getTransaction().rollback();
             System.out.println(e.getMessage());
-            transaction.rollback();
         }
     }
 
-    public void deleteUser(Integer id){
-            entityManager.remove(id);
+    public void deleteUser(Integer id) {
+        try {
+            entityManager.getTransaction().begin();
 
+            UserEntity userEntity = entityManager.find(UserEntity.class, id);
+            if (userEntity != null) {
+                entityManager.remove(userEntity);
+                entityManager.getTransaction().commit();
+            } else {
+                throw new IllegalArgumentException("User not found with ID: " + id);
+            }
+        } catch (Exception ex) {
+            entityManager.getTransaction().rollback();
+            System.out.println(ex.getMessage());
+        }
     }
 
     public List<UserEntity> findUsersByName(String name) {

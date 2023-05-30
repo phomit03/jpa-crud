@@ -43,6 +43,7 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Integer id = Integer.valueOf(req.getParameter("id"));
         String action = req.getParameter("action");
 
         if(action == null){
@@ -89,14 +90,14 @@ public class UserServlet extends HttpServlet {
     private void updateUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Integer id = Integer.valueOf(req.getParameter("id"));
         String name = req.getParameter("name");
-        String age = req.getParameter("age");
+        Integer age = Integer.valueOf(req.getParameter("age"));
         String address = req.getParameter("address");
 
-        UserEntity userEntity = new UserEntity(id, name, Integer.parseInt(age), address);
+        UserEntity userEntity = new UserEntity(id, name, age, address);
         userDAO.updateUser(userEntity);
 
         req.setAttribute("message", "Update user successfully");
-        userList(req,resp);
+        resp.sendRedirect("/userServlet");
     }
 
     private void deleteUser(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -105,7 +106,6 @@ public class UserServlet extends HttpServlet {
 
         req.setAttribute("message", "Delete user successfully");
         userList(req,resp);
-
     }
 
 }

@@ -1,3 +1,4 @@
+<%@ taglib prefix="a" uri="WEB-INFO/tld/myCustomTag.tld" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
@@ -41,9 +42,9 @@
     <jsp:setProperty name="userBean" property="address" value="Nghe An"/>
 
 <%--redirect sang testInclude.jsp--%>
-<jsp:forward page="testInclude.jsp">
+<%--<jsp:forward page="testInclude.jsp">
     <jsp:param name="name" value="value from index"/>
-</jsp:forward>
+</jsp:forward>--%>
 
 <%--convert chuoi sang so roi thuc hien tinh toan--%>
 <h1>Tổng: ${"2" + 2}</h1>
@@ -52,6 +53,10 @@
 
 <h1>param value: ${param.name}</h1>
 <h1>check param value: ${empty param.name}</h1>
+
+<br/>
+
+<a:myFirstCustomTag name="${userBean.name}"/>
 
 <br/>
 

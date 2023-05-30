@@ -49,7 +49,8 @@
                         <a href="/userServlet?action=editUser&id=${user.id}">edit</a>
                     </td>
                     <td>
-                        <a href="/userServlet?action=deleteUser&id=${user.id}">delete</a>
+                        <a href="/userServlet?action=deleteUser&id=${user.id}" style="color: red"
+                           onclick="return confirm('are you sure delete user id = ${user.id} ?')">delete</a>
                     </td>
                 </tr>
             </c:forEach>

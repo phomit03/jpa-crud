@@ -21,19 +21,19 @@
         <input type="hidden" name="action" value="updateUser">
 
         <div class="mb-3">
-            <input type="hidden" class="form-control" name="id" id="id" value="${user.id}">
+            <input type="hidden" class="form-control" name="id" value="${user.id}">
         </div>
         <div class="mb-3">
             <label class="form-label">User Name</label>
-            <input type="text" class="form-control" name="name" id="name" value="${user.name}">
+            <input type="text" class="form-control" name="name" value="${user.name}">
         </div>
         <div class="mb-3">
             <label class="form-label">User Age</label>
-            <input type="text" class="form-control" name="age" id="age" value="${user.age}">
+            <input type="text" class="form-control" name="age" value="${user.age}">
         </div>
         <div class="mb-3">
             <label class="form-label">User Address</label>
-            <input type="text" class="form-control" name="address" id="address" value="${user.address}">
+            <input type="text" class="form-control" name="address" value="${user.address}">
         </div>
 
         <button type="submit" class="btn btn-primary">Save</button>
